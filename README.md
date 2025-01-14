@@ -1,2 +1,3 @@
 # xterm-colors-cheat-sheet
-A comprehensive cheat sheet for the 255 xterm colors. Created using JavaScript, HTML, and CSS, this tool allows you to click on any color name or value (HEX, RGB, HSL) and copy it to your clipboard. Perfect for developers and designers working with terminal colors. [MIT Licensed].
+
+A comprehensive cheat sheet for all 255 xterm colors, designed to aid developers and designers alike. This tool, crafted with JavaScript, HTML, and CSS, features an interactive table where you can click on any color name or value (including HEX, RGB, and HSL) to copy it to your clipboard instantly. Streamline your workflow with easy access to terminal colors. The project is open-source and MIT Licensed. Visit our GitHub repository for more details and contributions. [MIT Licensed].
