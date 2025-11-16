@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Luciano Federico Pereira">
-    <meta name="description"
-        content="XTerm Color Cheat Sheet you can click on any of the  255 colors to copy the name, HEX, RGB, or HSL value to the clipboard.">
+    <meta name="description" content="XTerm Color Cheat Sheet you can click on any of the  255 colors to copy the name, HEX, RGB, or HSL value to the clipboard.">
     <meta name="license" content="MIT">
     <meta name="repository" content="https://github.com/lucianofedericopereira/">
     <title>Xterm Colors</title>
@@ -18,6 +17,7 @@
         body {
             margin: 0;
             padding: 0 0 1.2rem 0;
+            font-family: sans-serif;
         }
         h1 {
             position: sticky;
@@ -25,8 +25,8 @@
             margin: 0;
             padding: 2rem 0 2rem 0;
             color: #ffd787;
-            line-height: 7rem;
-            font-size: 7rem;
+            line-height: 3rem;
+            font-size: 3rem;
             font-weight: bold;
             text-align: center;
         }
@@ -37,48 +37,98 @@
         }
         thead {
             position: sticky;
-            top: 10rem;
+            top:5.75rem;
             padding: 0;
             margin: 0;
             font-size: large;
         }
         td {
-            height: 2.75rem
+            height: 4rem;
+            margin:0;
+            padding:0 2ch;
         }
         td:nth-child(1) {
             min-width: 6rem;
             border-radius: .75rem;
         }
-        td:nth-child(2),
-        th:nth-child(2) {
-            text-align: right;
-            width: 5ch
-        }
         th:nth-child(3),
         td:nth-child(3) {
-            text-align: left;
-            padding-left: 2ch;
-            width: 14ch;
             font-weight: bold;
-            font-size: large;
+            text-align: left;
+            padding: 0 2ch;
+        }
+        th:nth-child(4),
+        td:nth-child(4) {
+            text-align: left;
+            padding: 0 2ch;
         }
         td:nth-child(4),
         td:nth-child(5),
-        td:nth-child(6) {
+        td:nth-child(6),
+        td:nth-child(7){
+            margin: 0;
             font-family: monospace;
-            text-transform: uppercase;
-            font-size: large;
-            padding: 0 1ch;
+            font-size: 16px;
         }
-        td:nth-child(3):hover,
-        td:nth-child(4):hover,
-        td:nth-child(5):hover,
-        td:nth-child(6):hover {
+        td:nth-child(5),
+        td:nth-child(6),
+        td:nth-child(7){
+            text-transform: uppercase;
+        }
+        span {
+            color: #00e787;
+        }
+        td:hover {
             background-color: #00d787;
             color: #ffffff;
             cursor: pointer;
             border-radius: 1vh;
             user-select: none;
+        }
+        td:hover span {
+            color: #b7f7a7;
+        }
+        th:nth-child(3),
+        td:nth-child(3),
+        th:nth-child(5),
+        td:nth-child(5),
+        th:nth-child(6),
+        td:nth-child(6),
+        th:nth-child(7),
+        td:nth-child(7){
+            display: none;
+        }
+        @media (min-width: 775px) {
+            th:nth-child(3),
+            td:nth-child(3){
+                display: table-cell;
+            }
+
+        }
+        @media (min-width: 1000px) {
+            h1 {
+                line-height: 7rem;
+                font-size: 7rem;
+            }
+            thead {
+                top: 10rem;
+            }
+            th:nth-child(5),
+            td:nth-child(5){
+                display: table-cell;
+            }
+        }
+        @media (min-width: 1300px) {
+            th:nth-child(6),
+            td:nth-child(6){
+                display: table-cell;
+            }
+        }
+        @media (min-width: 1400px) {
+            th:nth-child(7),
+            td:nth-child(7){
+                display: table-cell;
+            }
         }
     </style>
 </head>
@@ -88,8 +138,9 @@
         <thead>
             <tr>
                 <th>Color</th>
-                <th>#</th>
+                <th>⌗</th>
                 <th>Name</th>
+                <th>Code</th>
                 <th>Hex</th>
                 <th>RGB</th>
                 <th>HSL</th>
@@ -98,284 +149,76 @@
         <tbody></tbody>
     </table>
     <script>
-        const
-            pad = (str = '', n = 3) => str.split(',').map(s => s.padStart(n, 'X').replace(/X/g, '&nbsp;')),
-            colors = [
-                ['Black', '000000', '0,0,0', '0,0%,0%'],
-                ['Maroon', '800000', '128,0,0', '0,100%,25%'],
-                ['Green', '008000', '0,128,0', '120,100%,25%'],
-                ['Olive', '808000', '128,128,0', '60,100%,25%'],
-                ['Navy', '000080', '0,0,128', '240,100%,25%'],
-                ['Purple', '800080', '128,0,128', '300,100%,25%'],
-                ['Teal', '008080', '0,128,128', '180,100%,25%'],
-                ['Silver', 'c0c0c0', '192,192,192', '0,0%,75%'],
-                ['Grey', '808080', '128,128,128', '0,0%,50%'],
-                ['Red', 'ff0000', '255,0,0', '0,100%,50%'],
-                ['Lime', '00ff00', '0,255,0', '120,100%,50%'],
-                ['Yellow', 'ffff00', '255,255,0', '60,100%,50%'],
-                ['Blue', '0000ff', '0,0,255', '240,100%,50%'],
-                ['Fuchsia', 'ff00ff', '255,0,255', '300,100%,50%'],
-                ['Aqua', '00ffff', '0,255,255', '180,100%,50%'],
-                ['White', 'ffffff', '255,255,255', '0,0%,100%'],
-                ['Grey0', '000000', '0,0,0', '0,0%,0%'],
-                ['NavyBlue', '00005f', '0,0,95', '240,100%,18%'],
-                ['DarkBlue', '000087', '0,0,135', '240,100%,26%'],
-                ['Blue3', '0000af', '0,0,175', '240,100%,34%'],
-                ['Blue3', '0000d7', '0,0,215', '240,100%,42%'],
-                ['Blue1', '0000ff', '0,0,255', '240,100%,50%'],
-                ['DarkGreen', '005f00', '0,95,0', '120,100%,18%'],
-                ['DeepSkyBlue4', '005f5f', '0,95,95', '180,100%,18%'],
-                ['DeepSkyBlue4', '005f87', '0,95,135', '97,100%,26%'],
-                ['DeepSkyBlue4', '005faf', '0,95,175', '07,100%,34%'],
-                ['DodgerBlue3', '005fd7', '0,95,215', '13,100%,42%'],
-                ['DodgerBlue2', '005fff', '0,95,255', '17,100%,50%'],
-                ['Green4', '008700', '0,135,0', '120,100%,26%'],
-                ['SpringGreen4', '00875f', '0,135,95', '62,100%,26%'],
-                ['Turquoise4', '008787', '0,135,135', '180,100%,26%'],
-                ['DeepSkyBlue3', '0087af', '0,135,175', '93,100%,34%'],
-                ['DeepSkyBlue3', '0087d7', '0,135,215', '02,100%,42%'],
-                ['DodgerBlue1', '0087ff', '0,135,255', '08,100%,50%'],
-                ['Green3', '00af00', '0,175,0', '120,100%,34%'],
-                ['SpringGreen3', '00af5f', '0,175,95', '52,100%,34%'],
-                ['DarkCyan', '00af87', '0,175,135', '66,100%,34%'],
-                ['LightSeaGreen', '00afaf', '0,175,175', '180,100%,34%'],
-                ['DeepSkyBlue2', '00afd7', '0,175,215', '91,100%,42%'],
-                ['DeepSkyBlue1', '00afff', '0,175,255', '98,100%,50%'],
-                ['Green3', '00d700', '0,215,0', '120,100%,42%'],
-                ['SpringGreen3', '00d75f', '0,215,95', '46,100%,42%'],
-                ['SpringGreen2', '00d787', '0,215,135', '57,100%,42%'],
-                ['Cyan3', '00d7af', '0,215,175', '68,100%,42%'],
-                ['DarkTurquoise', '00d7d7', '0,215,215', '180,100%,42%'],
-                ['Turquoise2', '00d7ff', '0,215,255', '89,100%,50%'],
-                ['Green1', '00ff00', '0,255,0', '120,100%,50%'],
-                ['SpringGreen2', '00ff5f', '0,255,95', '42,100%,50%'],
-                ['SpringGreen1', '00ff87', '0,255,135', '51,100%,50%'],
-                ['MediumSpringGreen', '00ffaf', '0,255,175', '61,100%,50%'],
-                ['Cyan2', '00ffd7', '0,255,215', '70,100%,50%'],
-                ['Cyan1', '00ffff', '0,255,255', '180,100%,50%'],
-                ['DarkRed', '5f0000', '95,0,0', '0,100%,18%'],
-                ['DeepPink4', '5f005f', '95,0,95', '300,100%,18%'],
-                ['Purple4', '5f0087', '95,0,135', '82,100%,26%'],
-                ['Purple4', '5f00af', '95,0,175', '72,100%,34%'],
-                ['Purple3', '5f00d7', '95,0,215', '66,100%,42%'],
-                ['BlueViolet', '5f00ff', '95,0,255', '62,100%,50%'],
-                ['Orange4', '5f5f00', '95,95,0', '60,100%,18%'],
-                ['Grey37', '5f5f5f', '95,95,95', '0,0%,37%'],
-                ['MediumPurple4', '5f5f87', '95,95,135', '240,17%,45%'],
-                ['SlateBlue3', '5f5faf', '95,95,175', '240,33%,52%'],
-                ['SlateBlue3', '5f5fd7', '95,95,215', '240,60%,60%'],
-                ['RoyalBlue1', '5f5fff', '95,95,255', '240,100%,68%'],
-                ['Chartreuse4', '5f8700', '95,135,0', '7,100%,26%'],
-                ['DarkSeaGreen4', '5f875f', '95,135,95', '120,17%,45%'],
-                ['PaleTurquoise4', '5f8787', '95,135,135', '180,17%,45%'],
-                ['SteelBlue', '5f87af', '95,135,175', '210,33%,52%'],
-                ['SteelBlue3', '5f87d7', '95,135,215', '220,60%,60%'],
-                ['CornflowerBlue', '5f87ff', '95,135,255', '225,100%,68%'],
-                ['Chartreuse3', '5faf00', '95,175,0', '7,100%,34%'],
-                ['DarkSeaGreen4', '5faf5f', '95,175,95', '120,33%,52%'],
-                ['CadetBlue', '5faf87', '95,175,135', '150,33%,52%'],
-                ['CadetBlue', '5fafaf', '95,175,175', '180,33%,52%'],
-                ['SkyBlue3', '5fafd7', '95,175,215', '200,60%,60%'],
-                ['SteelBlue1', '5fafff', '95,175,255', '210,100%,68%'],
-                ['Chartreuse3', '5fd700', '95,215,0', '3,100%,42%'],
-                ['PaleGreen3', '5fd75f', '95,215,95', '120,60%,60%'],
-                ['SeaGreen3', '5fd787', '95,215,135', '140,60%,60%'],
-                ['Aquamarine3', '5fd7af', '95,215,175', '160,60%,60%'],
-                ['MediumTurquoise', '5fd7d7', '95,215,215', '180,60%,60%'],
-                ['SteelBlue1', '5fd7ff', '95,215,255', '195,100%,68%'],
-                ['Chartreuse2', '5fff00', '95,255,0', '7,100%,50%'],
-                ['SeaGreen2', '5fff5f', '95,255,95', '120,100%,68%'],
-                ['SeaGreen1', '5fff87', '95,255,135', '135,100%,68%'],
-                ['SeaGreen1', '5fffaf', '95,255,175', '150,100%,68%'],
-                ['Aquamarine1', '5fffd7', '95,255,215', '165,100%,68%'],
-                ['DarkSlateGray2', '5fffff', '95,255,255', '180,100%,68%'],
-                ['DarkRed', '870000', '135,0,0', '0,100%,26%'],
-                ['DeepPink4', '87005f', '135,0,95', '17,100%,26%'],
-                ['DarkMagenta', '870087', '135,0,135', '300,100%,26%'],
-                ['DarkMagenta', '8700af', '135,0,175', '86,100%,34%'],
-                ['DarkViolet', '8700d7', '135,0,215', '77,100%,42%'],
-                ['Purple', '8700ff', '135,0,255', '71,100%,50%'],
-                ['Orange4', '875f00', '135,95,0', '2,100%,26%'],
-                ['LightPink4', '875f5f', '135,95,95', '0,17%,45%'],
-                ['Plum4', '875f87', '135,95,135', '300,17%,45%'],
-                ['MediumPurple3', '875faf', '135,95,175', '270,33%,52%'],
-                ['MediumPurple3', '875fd7', '135,95,215', '260,60%,60%'],
-                ['SlateBlue1', '875fff', '135,95,255', '255,100%,68%'],
-                ['Yellow4', '878700', '135,135,0', '60,100%,26%'],
-                ['Wheat4', '87875f', '135,135,95', '60,17%,45%'],
-                ['Grey53', '878787', '135,135,135', '0,0%,52%'],
-                ['LightSlateGrey', '8787af', '135,135,175', '240,20%,60%'],
-                ['MediumPurple', '8787d7', '135,135,215', '240,50%,68%'],
-                ['LightSlateBlue', '8787ff', '135,135,255', '240,100%,76%'],
-                ['Yellow4', '87af00', '135,175,0', '3,100%,34%'],
-                ['DarkOliveGreen3', '87af5f', '135,175,95', '90,33%,52%'],
-                ['DarkSeaGreen', '87af87', '135,175,135', '120,20%,60%'],
-                ['LightSkyBlue3', '87afaf', '135,175,175', '180,20%,60%'],
-                ['LightSkyBlue3', '87afd7', '135,175,215', '210,50%,68%'],
-                ['SkyBlue2', '87afff', '135,175,255', '220,100%,76%'],
-                ['Chartreuse2', '87d700', '135,215,0', '2,100%,42%'],
-                ['DarkOliveGreen3', '87d75f', '135,215,95', '100,60%,60%'],
-                ['PaleGreen3', '87d787', '135,215,135', '120,50%,68%'],
-                ['DarkSeaGreen3', '87d7af', '135,215,175', '150,50%,68%'],
-                ['DarkSlateGray3', '87d7d7', '135,215,215', '180,50%,68%'],
-                ['SkyBlue1', '87d7ff', '135,215,255', '200,100%,76%'],
-                ['Chartreuse1', '87ff00', '135,255,0', '8,100%,50%'],
-                ['LightGreen', '87ff5f', '135,255,95', '105,100%,68%'],
-                ['LightGreen', '87ff87', '135,255,135', '120,100%,76%'],
-                ['PaleGreen1', '87ffaf', '135,255,175', '140,100%,76%'],
-                ['Aquamarine1', '87ffd7', '135,255,215', '160,100%,76%'],
-                ['DarkSlateGray1', '87ffff', '135,255,255', '180,100%,76%'],
-                ['Red3', 'af0000', '175,0,0', '0,100%,34%'],
-                ['DeepPink4', 'af005f', '175,0,95', '27,100%,34%'],
-                ['MediumVioletRed', 'af0087', '175,0,135', '13,100%,34%'],
-                ['Magenta3', 'af00af', '175,0,175', '300,100%,34%'],
-                ['DarkViolet', 'af00d7', '175,0,215', '88,100%,42%'],
-                ['Purple', 'af00ff', '175,0,255', '81,100%,50%'],
-                ['DarkOrange3', 'af5f00', '175,95,0', '2,100%,34%'],
-                ['IndianRed', 'af5f5f', '175,95,95', '0,33%,52%'],
-                ['HotPink3', 'af5f87', '175,95,135', '330,33%,52%'],
-                ['MediumOrchid3', 'af5faf', '175,95,175', '300,33%,52%'],
-                ['MediumOrchid', 'af5fd7', '175,95,215', '280,60%,60%'],
-                ['MediumPurple2', 'af5fff', '175,95,255', '270,100%,68%'],
-                ['DarkGoldenrod', 'af8700', '175,135,0', '6,100%,34%'],
-                ['LightSalmon3', 'af875f', '175,135,95', '30,33%,52%'],
-                ['RosyBrown', 'af8787', '175,135,135', '0,20%,60%'],
-                ['Grey63', 'af87af', '175,135,175', '300,20%,60%'],
-                ['MediumPurple2', 'af87d7', '175,135,215', '270,50%,68%'],
-                ['MediumPurple1', 'af87ff', '175,135,255', '260,100%,76%'],
-                ['Gold3', 'afaf00', '175,175,0', '60,100%,34%'],
-                ['DarkKhaki', 'afaf5f', '175,175,95', '60,33%,52%'],
-                ['NavajoWhite3', 'afaf87', '175,175,135', '60,20%,60%'],
-                ['Grey69', 'afafaf', '175,175,175', '0,0%,68%'],
-                ['LightSteelBlue3', 'afafd7', '175,175,215', '240,33%,76%'],
-                ['LightSteelBlue', 'afafff', '175,175,255', '240,100%,84%'],
-                ['Yellow3', 'afd700', '175,215,0', '1,100%,42%'],
-                ['DarkOliveGreen3', 'afd75f', '175,215,95', '80,60%,60%'],
-                ['DarkSeaGreen3', 'afd787', '175,215,135', '90,50%,68%'],
-                ['DarkSeaGreen2', 'afd7af', '175,215,175', '120,33%,76%'],
-                ['LightCyan3', 'afd7d7', '175,215,215', '180,33%,76%'],
-                ['LightSkyBlue1', 'afd7ff', '175,215,255', '210,100%,84%'],
-                ['GreenYellow', 'afff00', '175,255,0', '8,100%,50%'],
-                ['DarkOliveGreen2', 'afff5f', '175,255,95', '90,100%,68%'],
-                ['PaleGreen1', 'afff87', '175,255,135', '100,100%,76%'],
-                ['DarkSeaGreen2', 'afffaf', '175,255,175', '120,100%,84%'],
-                ['DarkSeaGreen1', 'afffd7', '175,255,215', '150,100%,84%'],
-                ['PaleTurquoise1', 'afffff', '175,255,255', '180,100%,84%'],
-                ['Red3', 'd70000', '215,0,0', '0,100%,42%'],
-                ['DeepPink3', 'd7005f', '215,0,95', '33,100%,42%'],
-                ['DeepPink3', 'd70087', '215,0,135', '22,100%,42%'],
-                ['Magenta3', 'd700af', '215,0,175', '11,100%,42%'],
-                ['Magenta3', 'd700d7', '215,0,215', '300,100%,42%'],
-                ['Magenta2', 'd700ff', '215,0,255', '90,100%,50%'],
-                ['DarkOrange3', 'd75f00', '215,95,0', '6,100%,42%'],
-                ['IndianRed', 'd75f5f', '215,95,95', '0,60%,60%'],
-                ['HotPink3', 'd75f87', '215,95,135', '340,60%,60%'],
-                ['HotPink2', 'd75faf', '215,95,175', '320,60%,60%'],
-                ['Orchid', 'd75fd7', '215,95,215', '300,60%,60%'],
-                ['MediumOrchid1', 'd75fff', '215,95,255', '285,100%,68%'],
-                ['Orange3', 'd78700', '215,135,0', '7,100%,42%'],
-                ['LightSalmon3', 'd7875f', '215,135,95', '20,60%,60%'],
-                ['LightPink3', 'd78787', '215,135,135', '0,50%,68%'],
-                ['Pink3', 'd787af', '215,135,175', '330,50%,68%'],
-                ['Plum3', 'd787d7', '215,135,215', '300,50%,68%'],
-                ['Violet', 'd787ff', '215,135,255', '280,100%,76%'],
-                ['Gold3', 'd7af00', '215,175,0', '8,100%,42%'],
-                ['LightGoldenrod3', 'd7af5f', '215,175,95', '40,60%,60%'],
-                ['Tan', 'd7af87', '215,175,135', '30,50%,68%'],
-                ['MistyRose3', 'd7afaf', '215,175,175', '0,33%,76%'],
-                ['Thistle3', 'd7afd7', '215,175,215', '300,33%,76%'],
-                ['Plum2', 'd7afff', '215,175,255', '270,100%,84%'],
-                ['Yellow3', 'd7d700', '215,215,0', '60,100%,42%'],
-                ['Khaki3', 'd7d75f', '215,215,95', '60,60%,60%'],
-                ['LightGoldenrod2', 'd7d787', '215,215,135', '60,50%,68%'],
-                ['LightYellow3', 'd7d7af', '215,215,175', '60,33%,76%'],
-                ['Grey84', 'd7d7d7', '215,215,215', '0,0%,84%'],
-                ['LightSteelBlue1', 'd7d7ff', '215,215,255', '240,100%,92%'],
-                ['Yellow2', 'd7ff00', '215,255,0', '9,100%,50%'],
-                ['DarkOliveGreen1', 'd7ff5f', '215,255,95', '75,100%,68%'],
-                ['DarkOliveGreen1', 'd7ff87', '215,255,135', '80,100%,76%'],
-                ['DarkSeaGreen1', 'd7ffaf', '215,255,175', '90,100%,84%'],
-                ['Honeydew2', 'd7ffd7', '215,255,215', '120,100%,92%'],
-                ['LightCyan1', 'd7ffff', '215,255,255', '180,100%,92%'],
-                ['Red1', 'ff0000', '255,0,0', '0,100%,50%'],
-                ['DeepPink2', 'ff005f', '255,0,95', '37,100%,50%'],
-                ['DeepPink1', 'ff0087', '255,0,135', '28,100%,50%'],
-                ['DeepPink1', 'ff00af', '255,0,175', '18,100%,50%'],
-                ['Magenta2', 'ff00d7', '255,0,215', '09,100%,50%'],
-                ['Magenta1', 'ff00ff', '255,0,255', '300,100%,50%'],
-                ['OrangeRed1', 'ff5f00', '255,95,0', '2,100%,50%'],
-                ['IndianRed1', 'ff5f5f', '255,95,95', '0,100%,68%'],
-                ['IndianRed1', 'ff5f87', '255,95,135', '345,100%,68%'],
-                ['HotPink', 'ff5faf', '255,95,175', '330,100%,68%'],
-                ['HotPink', 'ff5fd7', '255,95,215', '315,100%,68%'],
-                ['MediumOrchid1', 'ff5fff', '255,95,255', '300,100%,68%'],
-                ['DarkOrange', 'ff8700', '255,135,0', '1,100%,50%'],
-                ['Salmon1', 'ff875f', '255,135,95', '15,100%,68%'],
-                ['LightCoral', 'ff8787', '255,135,135', '0,100%,76%'],
-                ['PaleVioletRed1', 'ff87af', '255,135,175', '340,100%,76%'],
-                ['Orchid2', 'ff87d7', '255,135,215', '320,100%,76%'],
-                ['Orchid1', 'ff87ff', '255,135,255', '300,100%,76%'],
-                ['Orange1', 'ffaf00', '255,175,0', '1,100%,50%'],
-                ['SandyBrown', 'ffaf5f', '255,175,95', '30,100%,68%'],
-                ['LightSalmon1', 'ffaf87', '255,175,135', '20,100%,76%'],
-                ['LightPink1', 'ffafaf', '255,175,175', '0,100%,84%'],
-                ['Pink1', 'ffafd7', '255,175,215', '330,100%,84%'],
-                ['Plum1', 'ffafff', '255,175,255', '300,100%,84%'],
-                ['Gold1', 'ffd700', '255,215,0', '0,100%,50%'],
-                ['LightGoldenrod2', 'ffd75f', '255,215,95', '45,100%,68%'],
-                ['LightGoldenrod2', 'ffd787', '255,215,135', '40,100%,76%'],
-                ['NavajoWhite1', 'ffd7af', '255,215,175', '30,100%,84%'],
-                ['MistyRose1', 'ffd7d7', '255,215,215', '0,100%,92%'],
-                ['Thistle1', 'ffd7ff', '255,215,255', '300,100%,92%'],
-                ['Yellow1', 'ffff00', '255,255,0', '60,100%,50%'],
-                ['LightGoldenrod1', 'ffff5f', '255,255,95', '60,100%,68%'],
-                ['Khaki1', 'ffff87', '255,255,135', '60,100%,76%'],
-                ['Wheat1', 'ffffaf', '255,255,175', '60,100%,84%'],
-                ['Cornsilk1', 'ffffd7', '255,255,215', '60,100%,92%'],
-                ['Grey100', 'ffffff', '255,255,255', '0,0%,100%'],
-                ['Grey3', '080808', '8,8,8', '0,0%,3%'],
-                ['Grey7', '121212', '18,18,18', '0,0%,7%'],
-                ['Grey11', '1c1c1c', '28,28,28', '0,0%,10%'],
-                ['Grey15', '262626', '38,38,38', '0,0%,14%'],
-                ['Grey19', '303030', '48,48,48', '0,0%,18%'],
-                ['Grey23', '3a3a3a', '58,58,58', '0,0%,22%'],
-                ['Grey27', '444444', '68,68,68', '0,0%,26%'],
-                ['Grey30', '4e4e4e', '78,78,78', '0,0%,30%'],
-                ['Grey35', '585858', '88,88,88', '0,0%,34%'],
-                ['Grey39', '626262', '98,98,98', '0,0%,37%'],
-                ['Grey42', '6c6c6c', '108,108,108', '0,0%,40%'],
-                ['Grey46', '767676', '118,118,118', '0,0%,46%'],
-                ['Grey50', '808080', '128,128,128', '0,0%,50%'],
-                ['Grey54', '8a8a8a', '138,138,138', '0,0%,54%'],
-                ['Grey58', '949494', '148,148,148', '0,0%,58%'],
-                ['Grey62', '9e9e9e', '158,158,158', '0,0%,61%'],
-                ['Grey66', 'a8a8a8', '168,168,168', '0,0%,65%'],
-                ['Grey70', 'b2b2b2', '178,178,178', '0,0%,69%'],
-                ['Grey74', 'bcbcbc', '188,188,188', '0,0%,73%'],
-                ['Grey78', 'c6c6c6', '198,198,198', '0,0%,77%'],
-                ['Grey82', 'd0d0d0', '208,208,208', '0,0%,81%'],
-                ['Grey85', 'dadada', '218,218,218', '0,0%,85%'],
-                ['Grey89', 'e4e4e4', '228,228,228', '0,0%,89%'],
-                ['Grey93', 'eeeeee', '238,238,238', '0,0%,93%']
-            ], tbl = document.querySelector('tbody');
-        for (let i = 0; i < 256; i++) {
-            const row = tbl.insertRow(i), cols = [
-                pad(String(i)), colors[i][0], `#${colors[i][1]}`, `rgb(${pad(colors[i][2])})`, `hsl(${pad(colors[i][3], 4)})`
-            ];
-            cols.forEach((col, c) => {
-                const cell = row.insertCell(c);
-                cell.innerHTML = col;
-            });
-            row.insertCell(0).style.backgroundColor = '#' + colors[i][1];
-        }
-        tbl.querySelectorAll('td:nth-child(3), td:nth-child(4), td:nth-child(5), td:nth-child(6)').forEach(td => {
-            td.addEventListener('click', function () {
-                const cleanedContent = this.textContent.replace(/\s+/g, '').toLowerCase();
-                navigator.clipboard.writeText(cleanedContent).catch(err => {
-                    console.error('Failed to copy text: ', err);
+        const xTerm = {
+            colors:[{h:'000000',n:'Black'},{h:'800000',n:'Maroon'},{h:'008000',n:'Green'},{h:'808000',n:'Olive'},{h:'000080',n:'Navy'},{h:'800080',n:'Purple',v:1},{h:'008080',n:'Teal'},{h:'c0c0c0',n:'Silver'},{h:'808080',n:'Grey'},{h:'ff0000',n:'Red'},{h:'00ff00',n:'Lime'},{h:'ffff00',n:'Yellow'},{h:'0000ff',n:'Blue'},{h:'ff00ff',n:'Fuchsia'},{h:'00ffff',n:'Aqua'},{h:'ffffff',n:'White'},{h:'000000',n:'Grey0'},{h:'00005f',n:'NavyBlue'},{h:'000087',n:'DarkBlue'},{h:'0000af',n:'Blue3',v:1},{h:'0000d7',n:'Blue3',v:3},{h:'0000ff',n:'Blue1'},{h:'005f00',n:'DarkGreen'},{h:'005f5f',n:'DeepSkyBlue4',v:1},{h:'005f87',n:'DeepSkyBlue4',v:2},{h:'005faf',n:'DeepSkyBlue4',v:3},{h:'005fd7',n:'DodgerBlue3'},{h:'005fff',n:'DodgerBlue2'},{h:'008700',n:'Green4'},{h:'00875f',n:'SpringGreen4'},{h:'008787',n:'Turquoise4'},{h:'0087af',n:'DeepSkyBlue3',v:1},{h:'0087d7',n:'DeepSkyBlue3',v:3},{h:'0087ff',n:'DodgerBlue1'},{h:'00af00',n:'Green3',v:1},{h:'00af5f',n:'SpringGreen3',v:1},{h:'00af87',n:'DarkCyan'},{h:'00afaf',n:'LightSeaGreen'},{h:'00afd7',n:'DeepSkyBlue2'},{h:'00afff',n:'DeepSkyBlue1'},{h:'00d700',n:'Green3',v:3},{h:'00d75f',n:'SpringGreen3',v:3},{h:'00d787',n:'SpringGreen2',v:1},{h:'00d7af',n:'Cyan3'},{h:'00d7d7',n:'DarkTurquoise'},{h:'00d7ff',n:'Turquoise2'},{h:'00ff00',n:'Green1'},{h:'00ff5f',n:'SpringGreen2',v:3},{h:'00ff87',n:'SpringGreen1'},{h:'00ffaf',n:'MediumSpringGreen'},{h:'00ffd7',n:'Cyan2'},{h:'00ffff',n:'Cyan1'},{h:'5f0000',n:'DarkRed',v:1},{h:'5f005f',n:'DeepPink4',v:1},{h:'5f0087',n:'Purple4',v:1},{h:'5f00af',n:'Purple4',v:3},{h:'5f00d7',n:'Purple3'},{h:'5f00ff',n:'BlueViolet'},{h:'5f5f00',n:'Orange4',v:1},{h:'5f5f5f',n:'Grey37'},{h:'5f5f87',n:'MediumPurple4'},{h:'5f5faf',n:'SlateBlue3',v:1},{h:'5f5fd7',n:'SlateBlue3',v:3},{h:'5f5fff',n:'RoyalBlue1'},{h:'5f8700',n:'Chartreuse4'},{h:'5f875f',n:'DarkSeaGreen4',v:1},{h:'5f8787',n:'PaleTurquoise4'},{h:'5f87af',n:'SteelBlue'},{h:'5f87d7',n:'SteelBlue3'},{h:'5f87ff',n:'CornflowerBlue'},{h:'5faf00',n:'Chartreuse3',v:1},{h:'5faf5f',n:'DarkSeaGreen4',v:3},{h:'5faf87',n:'CadetBlue',v:1},{h:'5fafaf',n:'CadetBlue',v:3},{h:'5fafd7',n:'SkyBlue3'},{h:'5fafff',n:'SteelBlue1',v:1},{h:'5fd700',n:'Chartreuse3',v:3},{h:'5fd75f',n:'PaleGreen3',v:1},{h:'5fd787',n:'SeaGreen3'},{h:'5fd7af',n:'Aquamarine3'},{h:'5fd7d7',n:'MediumTurquoise'},{h:'5fd7ff',n:'SteelBlue1',v:3},{h:'5fff00',n:'Chartreuse2',v:1},{h:'5fff5f',n:'SeaGreen2'},{h:'5fff87',n:'SeaGreen1',v:1},{h:'5fffaf',n:'SeaGreen1',v:3},{h:'5fffd7',n:'Aquamarine1',v:1},{h:'5fffff',n:'DarkSlateGray2'},{h:'870000',n:'DarkRed',v:3},{h:'87005f',n:'DeepPink4',v:2},{h:'870087',n:'DarkMagenta',v:1},{h:'8700af',n:'DarkMagenta',v:3},{h:'8700d7',n:'DarkViolet',v:1},{h:'8700ff',n:'Purple',v:2},{h:'875f00',n:'Orange4',v:3},{h:'875f5f',n:'LightPink4'},{h:'875f87',n:'Plum4'},{h:'875faf',n:'MediumPurple3',v:1},{h:'875fd7',n:'MediumPurple3',v:3},{h:'875fff',n:'SlateBlue1'},{h:'878700',n:'Yellow4',v:1},{h:'87875f',n:'Wheat4'},{h:'878787',n:'Grey53'},{h:'8787af',n:'LightSlateGrey'},{h:'8787d7',n:'MediumPurple'},{h:'8787ff',n:'LightSlateBlue'},{h:'87af00',n:'Yellow4',v:3},{h:'87af5f',n:'DarkOliveGreen3',v:1},{h:'87af87',n:'DarkSeaGreen'},{h:'87afaf',n:'LightSkyBlue3',v:1},{h:'87afd7',n:'LightSkyBlue3',v:3},{h:'87afff',n:'SkyBlue2'},{h:'87d700',n:'Chartreuse2',v:3},{h:'87d75f',n:'DarkOliveGreen3',v:2},{h:'87d787',n:'PaleGreen3',v:3},{h:'87d7af',n:'DarkSeaGreen3'},{h:'87d7d7',n:'DarkSlateGray3'},{h:'87d7ff',n:'SkyBlue1'},{h:'87ff00',n:'Chartreuse1'},{h:'87ff5f',n:'LightGreen',v:1},{h:'87ff87',n:'LightGreen',v:3},{h:'87ffaf',n:'PaleGreen1',v:1},{h:'87ffd7',n:'Aquamarine1',v:3},{h:'87ffff',n:'DarkSlateGray1'},{h:'af0000',n:'Red3',v:1},{h:'af005f',n:'DeepPink4',v:3},{h:'af0087',n:'MediumVioletRed'},{h:'af00af',n:'Magenta3',v:1},{h:'af00d7',n:'DarkViolet',v:3},{h:'af00ff',n:'Purple',v:3},{h:'af5f00',n:'DarkOrange3',v:1},{h:'af5f5f',n:'IndianRed',v:1},{h:'af5f87',n:'HotPink3',v:1},{h:'af5faf',n:'MediumOrchid3'},{h:'af5fd7',n:'MediumOrchid'},{h:'af5fff',n:'MediumPurple2',v:1},{h:'af8700',n:'DarkGoldenrod'},{h:'af875f',n:'LightSalmon3',v:1},{h:'af8787',n:'RosyBrown'},{h:'af87af',n:'Grey63'},{h:'af87d7',n:'MediumPurple2',v:3},{h:'af87ff',n:'MediumPurple1'},{h:'afaf00',n:'Gold3',v:1},{h:'afaf5f',n:'DarkKhaki'},{h:'afaf87',n:'NavajoWhite3'},{h:'afafaf',n:'Grey69'},{h:'afafd7',n:'LightSteelBlue3'},{h:'afafff',n:'LightSteelBlue'},{h:'afd700',n:'Yellow3',v:1},{h:'afd75f',n:'DarkOliveGreen3',v:3},{h:'afd787',n:'DarkSeaGreen2',v:1},{h:'afd7af',n:'DarkSeaGreen2',v:2},{h:'afd7d7',n:'LightCyan3'},{h:'afd7ff',n:'LightSkyBlue1'},{h:'afff00',n:'GreenYellow'},{h:'afff5f',n:'DarkOliveGreen2'},{h:'afff87',n:'PaleGreen1',v:3},{h:'afffaf',n:'DarkSeaGreen2',v:3},{h:'afffd7',n:'DarkSeaGreen1',v:1},{h:'afffff',n:'PaleTurquoise1'},{h:'d70000',n:'Red3',v:3},{h:'d7005f',n:'DeepPink3',v:1},{h:'d70087',n:'DeepPink3',v:3},{h:'d700af',n:'Magenta3',v:2},{h:'d700d7',n:'Magenta3',v:3},{h:'d700ff',n:'Magenta2',v:1},{h:'d75f00',n:'DarkOrange3',v:3},{h:'d75f5f',n:'IndianRed',v:3},{h:'d75f87',n:'HotPink3',v:3},{h:'d75faf',n:'HotPink2'},{h:'d75fd7',n:'Orchid'},{h:'d75fff',n:'MediumOrchid1',v:1},{h:'d78700',n:'Orange3'},{h:'d7875f',n:'LightSalmon3',v:3},{h:'d78787',n:'LightPink3'},{h:'d787af',n:'Pink3'},{h:'d787d7',n:'Plum3'},{h:'d787ff',n:'Violet'},{h:'d7af00',n:'Gold3',v:3},{h:'d7af5f',n:'LightGoldenrod3'},{h:'d7af87',n:'Tan'},{h:'d7afaf',n:'MistyRose3'},{h:'d7afd7',n:'Thistle3'},{h:'d7afff',n:'Plum2'},{h:'d7d700',n:'Yellow3',v:3},{h:'d7d75f',n:'Khaki3'},{h:'d7d787',n:'LightGoldenrod2',v:1},{h:'d7d7af',n:'LightYellow3'},{h:'d7d7d7',n:'Grey84'},{h:'d7d7ff',n:'LightSteelBlue1'},{h:'d7ff00',n:'Yellow2'},{h:'d7ff5f',n:'DarkOliveGreen1',v:1},{h:'d7ff87',n:'DarkOliveGreen1',v:3},{h:'d7ffaf',n:'DarkSeaGreen1',v:3},{h:'d7ffd7',n:'Honeydew2'},{h:'d7ffff',n:'LightCyan1'},{h:'ff0000',n:'Red1'},{h:'ff005f',n:'DeepPink2'},{h:'ff0087',n:'DeepPink1',v:1},{h:'ff00af',n:'DeepPink1',v:3},{h:'ff00d7',n:'Magenta2',v:3},{h:'ff00ff',n:'Magenta1'},{h:'ff5f00',n:'OrangeRed1'},{h:'ff5f5f',n:'IndianRed1',v:1},{h:'ff5f87',n:'IndianRed1',v:3},{h:'ff5faf',n:'HotPink',v:1},{h:'ff5fd7',n:'HotPink',v:3},{h:'ff5fff',n:'MediumOrchid1',v:3},{h:'ff8700',n:'DarkOrange'},{h:'ff875f',n:'Salmon1'},{h:'ff8787',n:'LightCoral'},{h:'ff87af',n:'PaleVioletRed1'},{h:'ff87d7',n:'Orchid2'},{h:'ff87ff',n:'Orchid1'},{h:'ffaf00',n:'Orange1'},{h:'ffaf5f',n:'SandyBrown'},{h:'ffaf87',n:'LightSalmon1'},{h:'ffafaf',n:'LightPink1'},{h:'ffafd7',n:'Pink1'},{h:'ffafff',n:'Plum1'},{h:'ffd700',n:'Gold1'},{h:'ffd75f',n:'LightGoldenrod2',v:2},{h:'ffd787',n:'LightGoldenrod2',v:3},{h:'ffd7af',n:'NavajoWhite1'},{h:'ffd7d7',n:'MistyRose1'},{h:'ffd7ff',n:'Thistle1'},{h:'ffff00',n:'Yellow1'},{h:'ffff5f',n:'LightGoldenrod1'},{h:'ffff87',n:'Khaki1'},{h:'ffffaf',n:'Wheat1'},{h:'ffffd7',n:'Cornsilk1'},{h:'ffffff',n:'Grey100'},{h:'080808',n:'Grey3'},{h:'121212',n:'Grey7'},{h:'1c1c1c',n:'Grey11'},{h:'262626',n:'Grey15'},{h:'303030',n:'Grey19'},{h:'3a3a3a',n:'Grey23'},{h:'444444',n:'Grey27'},{h:'4e4e4e',n:'Grey30'},{h:'585858',n:'Grey35'},{h:'626262',n:'Grey39'},{h:'6c6c6c',n:'Grey42'},{h:'767676',n:'Grey46'},{h:'808080',n:'Grey50'},{h:'8a8a8a',n:'Grey54'},{h:'949494',n:'Grey58'},{h:'9e9e9e',n:'Grey62'},{h:'a8a8a8',n:'Grey66'},{h:'b2b2b2',n:'Grey70'},{h:'bcbcbc',n:'Grey74'},{h:'c6c6c6',n:'Grey78'},{h:'d0d0d0',n:'Grey82'},{h:'dadada',n:'Grey85'},{h:'e4e4e4',n:'Grey89'},{h:'eeeeee',n:'Grey93'}],
+            pad : (str = '', n = 3) => str.split(',').map(s => s.padStart(n, '\u00A0')),
+            hex_rgb : hex => [0, 2, 4].map(i => parseInt(hex.slice(i, i + 2), 16)),
+            rgb_hsl : ([r, g, b]) => {
+                r /= 255; g /= 255; b /= 255;
+                const max = Math.max(r, g, b), min = Math.min(r, g, b);
+                const l = (max + min) / 2, d = max - min;
+                let h = 0, s = 0;
+                if (d) {
+                    s = d / (l > 0.5 ? 2 - max - min : max + min);
+                    h = max === r ? (g - b) / d + (g < b ? 6 : 0)
+                      : max === g ? (b - r) / d + 2
+                      : (r - g) / d + 4;
+                    h *= 60;
+                };  return [
+                    Math.round(h), 
+                    Math.round(s * 100), 
+                    Math.round(l * 100)
+                ];
+            },
+            css: [
+                'Base','Dark','Medium','Light'
+            ],
+            code: (n,v) => {
+                return n
+                .replace(/(\d+)/g, '-$1')
+                .replace(/([A-Z])/g, '-$1')
+                .replace(/^-/, '')
+                .toLowerCase()
+                +
+                (xTerm.css[v]? `-${xTerm.css[v]}`:'')
+                .toLowerCase()
+                ;
+            },
+            render: () => {
+                const table = document.querySelector('tbody');
+                if(!table) return;
+                table.addEventListener('click', e => {
+                    const td = e.target.closest('td');
+                    if (!td) return;
+                    const cleaned = td.innerHTML
+                    .replace(/<span[^>]*>.*?<\/span>/gi, '')
+                    .replace(/&nbsp;/gi, '')
+                    .replace(/<[^>]+>/g, '')
+                    .trim()
+                    .toLowerCase()
+                    .replace(/\s+/g, '');
+                    navigator.clipboard.writeText(cleaned).catch(console.error);
                 });
-            });
-        });
+                xTerm.colors.forEach(({ h, n, v }, i) => {
+                    const rgb = xTerm.hex_rgb(h).join(',');
+                    const hsl = xTerm.rgb_hsl(xTerm.hex_rgb(h))
+                    .map((val, idx) => idx === 0 ? val : `${val}%`).join(',');
+                    const row = table.insertRow(i);
+                    [
+                        xTerm.pad(i.toString()), 
+                        `${n}<span>${xTerm.css[v]?' '+xTerm.css[v]:''}</span>`,
+                        xTerm.code(n,v),
+                        `#${h}`, 
+                        `rgb(${xTerm.pad(rgb)})`, 
+                        `hsl(${xTerm.pad(hsl, 4)})`
+                    ].forEach((col, c) => row.insertCell(c).innerHTML = col);
+                    const thumb = row.insertCell(0); 
+                    thumb.style.backgroundColor = `#${h}`;
+                    thumb.style.color = `#${h}`;
+                    thumb.innerText=i;
+                });
+            }
+        };  xTerm.render();
     </script>
 </body>
 </html>
