@@ -1,47 +1,37 @@
 #!/bin/bash
-
-echo 
-
-echo "   Xterm 256 Colors"
-echo 
-
-deltas=(0 6 6 6 6 6 36 -6 -6 -6 -6 -6)
-blocks=("16:21" "93:88" "160:165")
-range=("232:243:1" "255:244:-1" "0:7:1" "8:15:1")
-
-x(){
-  local c=$1
-  local fg=$(( (c >= 232 && c <= 243) ? 37 : 30 ))
-  (( c >= 0 && c <= 255 )) && printf "   \e[1;%d;48;5;%dm %3d \e[0m" "$fg" "$c" "$c"
+printf "\n   Xterm 256 Colors\n\n"
+x() {
+  local c=$1 fg
+  if (( c >= 232 && c <= 243 || c==8 )); then fg=37; else fg=30; fi
+  printf "   \e[1;%d;48;5;%dm %3d \e[0m" "$fg" "$c" "$c"
 }
-
 print_line() {
-  local n=$1 acc=$n
-  for d in "${deltas[@]}"; do
-    acc=$((acc + d))
-    x "$acc"
+  local s=$1 i c
+  for ((i=0; i<12; i++)); do
+    if (( i < 6 )); then
+      c=$(( s + 6*i ))
+    else
+      c=$(( s + 66 - 6*(i-6) ))
+    fi
+    x "$c"
   done
-  echo
-  echo
+  printf "\n\n"
 }
-
-print_range() {
-  local start=$1 end=$2 step=$3
-  for i in $(seq $start $step $end); do
-    x "$i"
-  done
-  echo
+print_n() {
+  local v=$1 step=$2 n=$3 i
+  for ((i=0; i<n; i++, v+=step)); do x "$v"; done
+  printf "\n\n"
 }
-
-for block in "${blocks[@]}"; do
-  IFS=":" read start end <<< "$block"
-  for n in $(seq $start $((start<end?1:-1)) $end); do
-    print_line "$n"
+for r in 0 2 4; do
+  base=$((16 + 36*r))
+  dir=$(( r == 2 ))
+  step=$(( 1 - 2*dir ))
+  start=$(( dir * 5 ))
+  for ((b=start; b!=start + 6*step; b+=step)); do
+    print_line $(( base + b ))
   done
 done
-
-for r in "${range[@]}"; do
-  IFS=":" read start end step <<< "$r"
-  print_range "$start" "$end" "$step"
-  echo
-done
+print_n 232  1 12
+print_n 255 -1 12
+print_n 0 1 8
+print_n 8 1 8
